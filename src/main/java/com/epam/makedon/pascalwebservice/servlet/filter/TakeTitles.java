@@ -10,6 +10,8 @@ import org.slf4j.LoggerFactory;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +20,7 @@ import java.util.List;
 public class TakeTitles implements Filter {
     private static final Logger LOGGER = LoggerFactory.getLogger(TakeTitles.class);
 
+    private static final String LOGIN = "login";
     private static final String TITLE_LIST = "titleList";
 
     @Override
@@ -32,6 +35,13 @@ public class TakeTitles implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+        HttpServletRequest req = (HttpServletRequest) servletRequest;
+        HttpSession session = req.getSession();
+        if (!Boolean.valueOf((String)session.getAttribute(LOGIN))) {
+            filterChain.doFilter(servletRequest, servletResponse);
+            return;
+        }
+
         Dao dao = ArticleDao.getInstance();
         List<Article> articleList;
         try {

@@ -14,6 +14,7 @@
     <fmt:message bundle="${locale}" key="text.en.locale.button" var="en_button"/>
     <fmt:message bundle="${locale}" key="text.ru.locale.button" var="ru_button"/>
     <fmt:message bundle="${locale}" key="text.authorization.page.title" var="title"/>
+    <fmt:message bundle="${locale}" key="text.vk.button" var="vk"/>
 
     <title>${title}</title>
 </head>
@@ -29,6 +30,11 @@
         <input type="hidden" name="command" value="change_locale">
         <input type="hidden" name="lang" value="ru">
         <input type="submit" value="${ru_button}">
+    </form>
+
+    <form action="/Controller" method="get">
+        <input type="hidden" name="command" value="vk_auth">
+        <input type="submit" value="${vk}">
     </form>
 </body>
 

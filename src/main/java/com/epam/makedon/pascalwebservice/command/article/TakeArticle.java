@@ -1,5 +1,7 @@
-package com.epam.makedon.pascalwebservice.command;
+package com.epam.makedon.pascalwebservice.command.article;
 
+import com.epam.makedon.pascalwebservice.command.Command;
+import com.epam.makedon.pascalwebservice.command.Page;
 import com.epam.makedon.pascalwebservice.dao.DaoException;
 import com.epam.makedon.pascalwebservice.dao.DaoRuntimeException;
 import com.epam.makedon.pascalwebservice.dao.article.Article;
