@@ -13,10 +13,7 @@
 
     <fmt:message bundle="${locale}" key="text.en.locale.button" var="en_button"/>
     <fmt:message bundle="${locale}" key="text.ru.locale.button" var="ru_button"/>
-    <fmt:message bundle="${locale}" key="text.index.page.title" var="title"/>
-    <fmt:message bundle="${locale}" key="text.article.title" var="article_title"/>
-    <fmt:message bundle="${locale}" key="text.add.button" var="add"/>
-    <fmt:message bundle="${locale}" key="text.logout.button" var="logout"/>
+    <fmt:message bundle="${locale}" key="text.authorization.page.title" var="title"/>
 
     <title>${title}</title>
 </head>
@@ -32,25 +29,6 @@
         <input type="hidden" name="command" value="change_locale">
         <input type="hidden" name="lang" value="ru">
         <input type="submit" value="${ru_button}">
-    </form>
-
-    <h4><a href="addPage.jsp">${add}</a></h4>
-
-    <h4>${article_title}:</h4>
-    <div style="overflow-y: scroll; width: 120px; height: 500px">
-        <form action="/Controller" method="get">
-            <input type="hidden" name="command" value="take_article">
-            <c:forEach items="${titleList}" var="title">
-                <input type="submit" name="title" value="${title}"><br>
-            </c:forEach>
-        </form>
-    </div>
-
-    <h4>${param.answer}</h4>
-
-    <form action="/Controller" method="get">
-        <input type="hidden" name="command" value="logout">
-        <input type="submit" value="${logout}">
     </form>
 </body>
 

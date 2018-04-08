@@ -1,9 +1,10 @@
 package com.epam.makedon.pascalwebservice.command;
 
 public enum Page {
-    INDEX("index.jsp"),
-    ADD("addPage.jsp"),
-    ARTICLE("articlePage.jsp"),
+    INDEX("/index.jsp"),
+    ADD("/addPage.jsp"),
+    ARTICLE("/articlePage.jsp"),
+    AUTHORIZATION("/authorizationPage.jsp"),
     ;
 
     private String path;

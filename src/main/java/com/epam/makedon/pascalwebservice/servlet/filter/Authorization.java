@@ -1,15 +1,17 @@
 package com.epam.makedon.pascalwebservice.servlet.filter;
 
+import com.epam.makedon.pascalwebservice.command.Page;
+
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebFilter(urlPatterns = {"/error/errorPage.jsp", "/addPage.jsp", "/index.jsp", "/Controller", "/articlePage.jsp", "/authorizationPage.jsp"},
-        filterName = "LastQuerySaverFilter")
-public class LastQuerySaver implements Filter {
-    private static final String LAST_PAGE = "lastPage";
+@WebFilter(filterName = "AuthorizationFilter", urlPatterns = "/*")
+public class Authorization implements Filter {
+    private static final String LOGIN = "login";
     private static final String COMMAND = "command";
     private static final String CHANGE_LOCALE = "change_locale";
 
@@ -27,21 +29,21 @@ public class LastQuerySaver implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) servletRequest;
 
+        if (req.getServletPath().equals(Page.AUTHORIZATION.getPath())) {
+            filterChain.doFilter(servletRequest, servletResponse);
+            return;
+        }
+
         String commandValue = req.getParameter(COMMAND);
         if (commandValue != null && commandValue.equals(CHANGE_LOCALE)) {
             filterChain.doFilter(servletRequest, servletResponse);
             return;
         }
 
-        String lastPage;
-        if (req.getQueryString() == null) {
-            lastPage = req.getServletPath();
-        } else {
-            lastPage = req.getServletPath() + "?" + req.getQueryString();
-        }
-
         HttpSession session = req.getSession();
-        session.setAttribute(LAST_PAGE, lastPage);
+        if (!Boolean.valueOf((String)session.getAttribute(LOGIN))) {
+            ((HttpServletResponse)servletResponse).sendRedirect(Page.AUTHORIZATION.getPath());
+        }
 
         filterChain.doFilter(servletRequest, servletResponse);
     }

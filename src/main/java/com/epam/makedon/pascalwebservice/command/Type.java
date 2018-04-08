@@ -5,6 +5,7 @@ public enum Type {
     ADD(new Add()),
     TAKE_ARTICLE(new TakeArticle()),
     ARTICLE_SERVICE(new ArticleService()),
+    LOGOUT(new Logout()),
     ;
 
     private Command command;

@@ -16,12 +16,15 @@ public class SessionCreater implements HttpSessionListener {
     private static final String LANG = "lang";
     private static final String EN = "en";
     private static final String LAST_PAGE = "lastPage";
+    private static final String LOGIN = "login";
+    private static final String FALSE = "false";
 
     @Override
     public void sessionCreated(HttpSessionEvent se) {
         HttpSession session = se.getSession();
         session.setAttribute(LANG, EN);
         session.setAttribute(LAST_PAGE, Page.INDEX.getPath());
+        session.setAttribute(LOGIN, FALSE);
         LOGGER.info(session.getId() + " session created");
     }
 
