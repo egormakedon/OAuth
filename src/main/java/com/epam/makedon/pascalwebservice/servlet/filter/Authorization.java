@@ -16,6 +16,8 @@ public class Authorization implements Filter {
     private static final String CHANGE_LOCALE = "change_locale";
     private static final String VK_AUTH = "vk_auth";
     private static final String VK_TAKE_CODE = "vk_take_code";
+    private static final String GOOGLE_AUTH = "google_auth";
+    private static final String GOOGLE_TAKE_CODE = "google_take_code";
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -37,7 +39,8 @@ public class Authorization implements Filter {
         }
 
         String commandValue = req.getParameter(COMMAND);
-        if (commandValue != null && (commandValue.equals(CHANGE_LOCALE) || commandValue.equals(VK_AUTH) || commandValue.equals(VK_TAKE_CODE))) {
+        if (commandValue != null && (commandValue.equals(CHANGE_LOCALE) || commandValue.equals(VK_AUTH) || commandValue.equals(VK_TAKE_CODE) ||
+        commandValue.equals(GOOGLE_AUTH) || commandValue.equals(GOOGLE_TAKE_CODE))) {
             filterChain.doFilter(servletRequest, servletResponse);
             return;
         }

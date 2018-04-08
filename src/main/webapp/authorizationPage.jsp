@@ -15,6 +15,7 @@
     <fmt:message bundle="${locale}" key="text.ru.locale.button" var="ru_button"/>
     <fmt:message bundle="${locale}" key="text.authorization.page.title" var="title"/>
     <fmt:message bundle="${locale}" key="text.vk.button" var="vk"/>
+    <fmt:message bundle="${locale}" key="text.google.button" var="google"/>
 
     <title>${title}</title>
 </head>
@@ -35,6 +36,11 @@
     <form action="/Controller" method="get">
         <input type="hidden" name="command" value="vk_auth">
         <input type="submit" value="${vk}">
+    </form>
+
+    <form action="/Controller" method="get">
+        <input type="hidden" name="command" value="google_auth">
+        <input type="submit" value="${google}">
     </form>
 </body>
 
